@@ -29,7 +29,7 @@ version = "0.1.20"
 features = ["http1", "tokio"]
 
 [dependencies.phf]
-version = "0.13.1"
+version = "0.14.0"
 features = ["macros"]
 
 [lints]
