@@ -26,7 +26,7 @@ impl SecurityToken {
             expires_at: DateTime,
             key: &[u8],
         ) -> Result<SecurityToken, Error> {
-            let signature = format!("{}:{}", &access_key_id, expires_at.timestamp());
+            let signature = format!("{}:{}", access_key_id, expires_at.timestamp());
             let authorization = crypto::encrypt(signature.as_bytes(), key)?;
             let token = base64::encode(authorization);
             Ok(SecurityToken {

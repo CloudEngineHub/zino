@@ -167,7 +167,7 @@ default-features = false
 features = ["http-listener"]
 
 [dependencies.phonenumber]
-version = "0.3.9"
+version = "0.3.10"
 optional = true
 
 [dependencies.random_word]
@@ -193,11 +193,11 @@ version = "0.21.3"
 optional = true
 
 [dependencies.sentry]
-version = "0.48.3"
+version = "0.48.4"
 optional = true
 
 [dependencies.sentry-tracing]
-version = "0.48.3"
+version = "0.48.4"
 optional = true
 
 [dependencies.sm4]

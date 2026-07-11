@@ -116,7 +116,7 @@ default-features = false
 features = ["parse", "serde"]
 
 [workspace.dependencies.uuid]
-version = "1.23.3"
+version = "1.23.4"
 features = [
     "fast-rng",
     "serde",
