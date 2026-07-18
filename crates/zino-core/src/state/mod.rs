@@ -150,7 +150,7 @@ impl<T> State<T> {
             };
             let prefix = key.to_ascii_uppercase();
             for (key, value) in table.iter_mut() {
-                let name = format!("ZINO_{}_{}", &prefix, key.to_case(Case::Constant));
+                let name = format!("ZINO_{}_{}", prefix, key.to_case(Case::Constant));
                 let Ok(s) = std::env::var(&name) else {
                     continue;
                 };

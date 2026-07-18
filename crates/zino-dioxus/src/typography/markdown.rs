@@ -18,6 +18,7 @@ pub fn Markdown(props: MarkdownProps) -> Element {
     options.extension.footnotes = true;
     options.extension.description_lists = true;
     options.extension.math_dollars = true;
+    options.extension.math_latex = true;
     options.extension.shortcodes = true;
     options.extension.underline = true;
     options.extension.subscript = false;
