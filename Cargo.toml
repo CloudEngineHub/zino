@@ -41,7 +41,7 @@ cfg-if = "1.0.4"
 convert_case = "0.11.0"
 etag = "4.0.0"
 fluent = "0.17.0"
-futures = "0.3.32"
+futures = "0.3.33"
 hmac = "0.13.0"
 http = "1.4.2"
 metrics = "0.24.6"
@@ -82,11 +82,11 @@ features = [
 ]
 
 [workspace.dependencies.serde]
-version = "1.0.228"
+version = "1.0.229"
 features = ["derive"]
 
 [workspace.dependencies.serde_json]
-version = "1.0.150"
+version = "1.0.151"
 features = ["raw_value"]
 
 [workspace.dependencies.sqlx]
@@ -100,7 +100,7 @@ features = [
 ]
 
 [workspace.dependencies.tokio]
-version = "1.53.0"
+version = "1.53.1"
 features = [
     "macros",
     "net",
