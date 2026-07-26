@@ -9,12 +9,12 @@ use zino_core::{
 
 /// Renders a template with the given data using [`tera`](https://crates.io/crates/tera).
 pub fn render(template_name: &str, data: Map) -> Result<String, Error> {
-    let context = Context::from_value(data.into())?;
+    let context = Context::from_serialize(&data)?;
     let content = if template_name.contains('.') {
-        SHARED_VIEW_ENGINE.render(template_name, &context)
+        SHARED_VIEW_ENGINE.render(template_name, &context)?
     } else {
         let name = [template_name, ".tera"].concat();
-        SHARED_VIEW_ENGINE.render(template_name, &context)?
+        SHARED_VIEW_ENGINE.render(&name, &context)?
     };
     Ok(content)
 }
@@ -31,7 +31,10 @@ static SHARED_VIEW_ENGINE: LazyLock<Tera> = LazyLock::new(|| {
 
     let template_dir = Agent::parse_path(template_dir);
     let dir_glob = template_dir.to_string_lossy().into_owned() + "/**/*";
-    let mut view_engine = Tera::new(dir_glob.as_str()).expect("fail to parse html templates");
+    let mut view_engine = Tera::new();
+    view_engine
+        .load_from_glob(dir_glob.as_str())
+        .expect("fail to parse html templates");
     view_engine.autoescape_on(vec![".html", ".html.tera", ".tera"]);
     if app_state.env().is_dev() {
         view_engine

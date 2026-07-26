@@ -103,7 +103,7 @@ validator-regex = ["validator", "dep:regex"]
 [dependencies]
 aes-gcm-siv = "0.11.1"
 anyhow = "1.0.104"
-base64 = "0.22.1"
+base64 = "0.23.0"
 cron = "0.17.0"
 csv = "1.4.0"
 faster-hex = "0.10.0"
