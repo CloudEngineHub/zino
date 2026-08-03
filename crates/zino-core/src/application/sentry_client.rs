@@ -12,12 +12,9 @@ pub(super) fn init<APP: Application + ?Sized>() {
 
     let app_env = APP::env();
     let in_dev_mode = app_env.is_dev();
-    let mut client_options = ClientOptions {
-        debug: in_dev_mode,
-        environment: Some(app_env.as_str().into()),
-        traces_sample_rate: 1.0,
-        ..Default::default()
-    };
+    let mut client_options = ClientOptions::new().debug(in_dev_mode)
+        .environment(app_env.as_str())
+        .traces_sample_rate(1.0);
     if let Some(config) = APP::config().get_table("sentry") {
         if let Some(dsn) = config.get_str("dsn") {
             client_options.dsn = dsn.parse().ok();
@@ -32,10 +29,10 @@ pub(super) fn init<APP: Application + ?Sized>() {
             client_options.environment = Some(environment.into());
         }
         if let Some(sample_rate) = config.get_f32("sample-rate") {
-            client_options.sample_rate = sample_rate;
+            client_options = client_options.sample_rate(sample_rate);
         }
         if let Some(traces_sample_rate) = config.get_f32("traces-sample-rate") {
-            client_options.traces_sample_rate = traces_sample_rate;
+            client_options = client_options.traces_sample_rate(traces_sample_rate);
         }
         if let Some(max_breadcrumbs) = config.get_usize("max-breadcrumbs") {
             client_options.max_breadcrumbs = max_breadcrumbs;
