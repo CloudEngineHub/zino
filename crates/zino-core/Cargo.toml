@@ -101,9 +101,9 @@ validator-phone-number = ["validator", "dep:phonenumber"]
 validator-regex = ["validator", "dep:regex"]
 
 [dependencies]
-aes-gcm-siv = "0.11.1"
+aes-gcm-siv = "0.12.0"
 anyhow = "1.0.104"
-base64 = "0.23.0"
+base64 = "0.23.1"
 cron = "0.17.0"
 csv = "1.4.0"
 faster-hex = "0.10.0"
@@ -193,11 +193,11 @@ version = "0.21.3"
 optional = true
 
 [dependencies.sentry]
-version = "0.49.0"
+version = "0.49.1"
 optional = true
 
 [dependencies.sentry-tracing]
-version = "0.49.0"
+version = "0.49.1"
 optional = true
 
 [dependencies.sm4]

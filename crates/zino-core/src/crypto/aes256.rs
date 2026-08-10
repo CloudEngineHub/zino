@@ -1,8 +1,5 @@
 use crate::{bail, error::Error, warn};
-use aes_gcm_siv::{
-    Aes256GcmSiv, KeyInit, Nonce,
-    aead::{Aead, generic_array::GenericArray},
-};
+use aes_gcm_siv::{Aes256GcmSiv, KeyInit, Nonce, aead::Aead};
 use rand::RngExt;
 
 /// Size of the `Key`.
@@ -13,15 +10,15 @@ const NONCE_SIZE: usize = 12;
 
 /// Encrypts the plaintext using `AES-GCM-SIV`.
 pub fn encrypt(plaintext: &[u8], key: &[u8]) -> Result<Vec<u8>, Error> {
-    let cipher = Aes256GcmSiv::new(GenericArray::from_slice(&padded_key(key)));
+    let cipher = Aes256GcmSiv::new_from_slice(&padded_key(key))?;
 
     let mut rng = rand::rng();
     let mut bytes = [0u8; NONCE_SIZE];
     rng.fill(&mut bytes);
 
-    let nonce = Nonce::from_slice(&bytes);
+    let nonce = Nonce::try_from(bytes.as_slice())?;
     let mut ciphertext = cipher
-        .encrypt(nonce, plaintext)
+        .encrypt(&nonce, plaintext)
         .map_err(|_| warn!("fail to encrypt the plaintext"))?;
     ciphertext.extend_from_slice(&bytes);
     Ok(ciphertext)
@@ -33,12 +30,11 @@ pub fn decrypt(data: &[u8], key: &[u8]) -> Result<Vec<u8>, Error> {
         bail!("invalid data length");
     }
 
-    let cipher = Aes256GcmSiv::new(GenericArray::from_slice(&padded_key(key)));
-
+    let cipher = Aes256GcmSiv::new_from_slice(&padded_key(key))?;
     let (ciphertext, bytes) = data.split_at(data.len() - NONCE_SIZE);
-    let nonce = GenericArray::from_slice(bytes);
+    let nonce = Nonce::try_from(bytes)?;
     cipher
-        .decrypt(nonce, ciphertext)
+        .decrypt(&nonce, ciphertext)
         .map_err(|_| warn!("fail to decrypt the ciphertext"))
 }
 

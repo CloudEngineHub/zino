@@ -12,7 +12,8 @@ pub(super) fn init<APP: Application + ?Sized>() {
 
     let app_env = APP::env();
     let in_dev_mode = app_env.is_dev();
-    let mut client_options = ClientOptions::new().debug(in_dev_mode)
+    let mut client_options = ClientOptions::new()
+        .debug(in_dev_mode)
         .environment(app_env.as_str())
         .traces_sample_rate(1.0);
     if let Some(config) = APP::config().get_table("sentry") {
