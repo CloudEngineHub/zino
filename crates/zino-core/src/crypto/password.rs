@@ -1,14 +1,10 @@
 use crate::{encoding::base64, error::Error};
-use argon2::{
-    Argon2,
-    password_hash::{PasswordHash, PasswordHasher, PasswordVerifier, SaltString, rand_core::OsRng},
-};
+use argon2::{Argon2, PasswordHash, PasswordHasher, PasswordVerifier};
 
 /// Encrypts the hashed password using `Argon2id`.
 pub fn encrypt_hashed_password(hashed_password: &[u8], key: &[u8]) -> Result<String, Error> {
-    let salt = SaltString::generate(&mut OsRng);
     let password_hash = Argon2::default()
-        .hash_password(hashed_password, &salt)?
+        .hash_password(hashed_password)?
         .to_string();
     let ciphertext = super::encrypt(password_hash.as_bytes(), key)?;
     Ok(base64::encode(ciphertext))
