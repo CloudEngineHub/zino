@@ -75,7 +75,7 @@ zino-core = { workspace = true, features = ["http-client"] }
 zino-storage = { workspace = true, features = ["http-client"] }
 
 [dependencies.cookie]
-version = "0.18.1"
+version = "0.18.2"
 optional = true
 
 [dependencies.http02]
@@ -89,7 +89,7 @@ optional = true
 features = ["loader"]
 
 [dependencies.tera]
-version = "2.1.1"
+version = "2.3.0"
 optional = true
 features = ["glob_fs"]
 
