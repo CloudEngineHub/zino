@@ -136,15 +136,13 @@ impl Application for Cluster {
                         let index_file = public_dir.join("index.html");
                         let favicon_file = public_dir.join("favicon.ico");
                         if index_file.exists() {
-                            let index_file_handler = web::get().to(move || async {
-                                NamedFile::open_async("./public/index.html").await
-                            });
+                            let index_file_handler = web::get()
+                                .to(move || async { NamedFile::open("./public/index.html") });
                             app = app.route("/", index_file_handler);
                         }
                         if favicon_file.exists() {
-                            let favicon_file_handler = web::get().to(|| async {
-                                NamedFile::open_async("./public/favicon.ico").await
-                            });
+                            let favicon_file_handler =
+                                web::get().to(|| async { NamedFile::open("./public/favicon.ico") });
                             app = app.route("/favicon.ico", favicon_file_handler);
                         }
 
@@ -156,7 +154,7 @@ impl Application for Cluster {
                         if not_found_file.exists() {
                             let not_found_service = fn_service(|req: ServiceRequest| async {
                                 let (req, _) = req.into_parts();
-                                let file = NamedFile::open_async("./public/404.html").await?;
+                                let file = NamedFile::open("./public/404.html")?;
                                 let res = file.into_response(&req);
                                 Ok(ServiceResponse::new(req, res))
                             });

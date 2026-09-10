@@ -16,9 +16,9 @@ license = { workspace = true }
 orm = ["zino-orm", "zino-orm/openapi"]
 
 [dependencies]
-actix-cors = "0.7.1"
-actix-files = "0.6.10"
-actix-http = "3.13.3"
+actix-cors = "0.7.2"
+actix-files = "0.7.0"
+actix-http = "3.13.5"
 futures = { workspace = true }
 tracing = { workspace = true }
 zino-core = { workspace = true, features = ["runtime-tokio"] }
@@ -27,7 +27,7 @@ zino-orm = { workspace = true, optional = true }
 zino-openapi = { workspace = true }
 
 [dependencies.actix-web]
-version = "4.14.1"
+version = "4.15.0"
 default-features = false
 features = ["compress-gzip"]
 
