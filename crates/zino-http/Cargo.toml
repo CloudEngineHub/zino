@@ -89,7 +89,7 @@ optional = true
 features = ["loader"]
 
 [dependencies.tera]
-version = "2.3.0"
+version = "2.4.0"
 optional = true
 features = ["glob_fs"]
 
