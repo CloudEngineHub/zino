@@ -315,6 +315,14 @@ impl Date {
             _ => panic!("invalid month: {month}"),
         }
     }
+
+    /// Parses a string with the specified format string.
+    /// See [`format::strftime`](chrono::format::strftime) for the supported escape sequences.
+    #[inline]
+    pub fn parse_from_str(s: &str, fmt: &str) -> Result<Self, ParseError> {
+        let date = NaiveDate::parse_from_str(s, fmt)?;
+        Ok(Self(date))
+    }
 }
 
 impl Default for Date {

@@ -1,7 +1,7 @@
 [package]
 name = "zino-core"
 description = "Core types and traits for zino."
-version = "0.44.0"
+version = "0.44.1"
 categories = ["asynchronous", "network-programming", "web-programming::http-server"]
 keywords = ["http", "web", "framework"]
 readme = "README.md"
@@ -190,11 +190,11 @@ version = "0.21.3"
 optional = true
 
 [dependencies.sentry]
-version = "0.49.2"
+version = "0.49.3"
 optional = true
 
 [dependencies.sentry-tracing]
-version = "0.49.2"
+version = "0.49.3"
 optional = true
 
 [dependencies.sm4]

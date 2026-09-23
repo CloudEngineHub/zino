@@ -126,6 +126,14 @@ impl Time {
     pub fn second(&self) -> u32 {
         self.0.second()
     }
+
+    /// Parses a string with the specified format string.
+    /// See [`format::strftime`](chrono::format::strftime) for the supported escape sequences.
+    #[inline]
+    pub fn parse_from_str(s: &str, fmt: &str) -> Result<Self, ParseError> {
+        let time = NaiveTime::parse_from_str(s, fmt)?;
+        Ok(Self(time))
+    }
 }
 
 impl Default for Time {
